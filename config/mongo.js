@@ -3,9 +3,14 @@ const mongoose = require("mongoose");
 const dbConnect = () =>{
     const DB_URI = process.env.DB_URI;
     mongoose.connect(DB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    },(err, res)=>{
+        auth: {
+          username: process.env.COSMOSDB_USER,
+          password: process.env.COSMOSDB_PASSWORD
+        },
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      retryWrites: false
+      },(err, res)=>{
         if(!err){
             console.log("*** CONEXION CORRECTA ***");
         }else{

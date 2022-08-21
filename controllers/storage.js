@@ -21,7 +21,7 @@ const getItem = (req, res)=>{}
  * @param {*} res 
  */
 const createItem = async (req, res) => {
-    const { body, file } = req;
+    const { file } = req;
     console.log(file);
     const fileData = {
         filename: file.filename,
