@@ -35,14 +35,14 @@ const createItem = async (req, res) => {
     }
 
    //const data = await storageModel.create(fileData);
-   const containerName = "images";
+   const containerName = "images"; 
    const blobName = "quickstart.txt";
    
    const containerClient = blobService.getContainerClient(containerName);
    const blockBlobClient = containerClient.getBlockBlobClient(blobName);
 
-    const message = "Hello, World!";
-    const data = await blockBlobClient.upload(message, message.length);
+    //const message = "Hello, World!";
+    const data = await blockBlobClient.upload(fileData.url);
     res.send({data});
 }
 
