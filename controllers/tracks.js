@@ -19,7 +19,16 @@ const getItems = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const getItem = (req, res)=>{}
+const getItem = async (req, res)=>{
+    try {
+        req = matchedData(req);
+        const {id} = req;
+        const data = await tracksModel.findById(id);
+        res.send({data});
+    } catch (error) {
+        handleHttpError(res, "ERROR_GET_ITEMS")
+    }
+}
 /**
  *Obtener un registro
  * @param {*} req 
@@ -39,12 +48,12 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = (req, res)=>{}
+const updateItem = async (req, res)=>{}
 /**
  * Eliminar un registro
  * @param {*} req 
  * @param {*} res 
  */
-const deleteItem = (req, res)=>{}
+const deleteItem = async (req, res)=>{}
 
 module.exports = {getItems, getItem, createItem, updateItem, deleteItem};
