@@ -48,7 +48,16 @@ const createItem = async (req, res) => {
  * @param {*} req 
  * @param {*} res 
  */
-const updateItem = async (req, res)=>{}
+const updateItem = async (req, res)=>{
+    try {
+        const {id, ...body} = matchedData(req)
+        const data = await tracksModel.findOneAndUpdate(id, body);
+        res.send({data});
+    } catch (error) {
+        handleHttpError(res, "ERROR_UPDATE_ITEM");
+
+    }
+}
 /**
  * Eliminar un registro
  * @param {*} req 
