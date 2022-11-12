@@ -9,7 +9,7 @@ const encrypt = async (password) =>{
 }
 
 /**
- * Pasar contaseña sin encriptar y contraseña encriptada
+ * Pasar contraseña sin encriptar y contraseña encriptada
  * @param {*} password 
  * @param {*} hash 
  */
