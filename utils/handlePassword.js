@@ -13,8 +13,8 @@ const encrypt = async (password) =>{
  * @param {*} password 
  * @param {*} hash 
  */
-const compare = async (password, hash) => {
+const comparar = async (password, hash) => {
     return await bcrypt.compare(password, hash);
 }
 
-module.exports = {encrypt, compare}
+module.exports = {encrypt, comparar}
