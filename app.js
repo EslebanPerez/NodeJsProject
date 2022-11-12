@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.static("storage"))
 
 const port = process.env.PORT || 3000;
-/**Aqui invocamos a las rutas */
+/**Aquí invocamos a las rutas */
 app.use("/api", require("./routes"));  //localhost/api/_____
 
 app.listen( port , () =>{
-    console.log('La app esta lista por http://localhost:'+port);
+    console.log('La app esta lista por http://localhost:'+port+" 🚀");
 })
 dbConnect();
