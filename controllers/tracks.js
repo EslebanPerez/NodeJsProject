@@ -16,7 +16,7 @@ const getItems = async (req, res) => {
     }
 }
 /**
- * Otener un detalle
+ * Obtener un detalle
  * @param {*} req 
  * @param {*} res 
  */
