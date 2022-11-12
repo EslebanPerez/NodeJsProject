@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const {getItems, getItem, createItem, updateItem, deleteItem} = require('../controllers/tracks');
 const customHeader = require('../middleware/customHeader');
+const authMiddleware = require('../middleware/session');
 const {validatorCreateItem, validatorGetItem} = require("../validators/tracks")
 //Aqui se creara la ruta de acceso http://localhost/tracks con los metodos GET, POST, DELETE, PUT
 
 /**
  * Lista los items
  */
-router.get("/", getItems)
+router.get("/", authMiddleware, getItems)
 /**
  * Obtener detalle de Item
  */

@@ -1,7 +1,7 @@
 const { matchedData } = require("express-validator");
 const { userModel } = require("../models");
 const { tokenSign } = require("../utils/handleJwt");
-const { encrypt, compare } = require("../utils/handlePassword");
+const { encrypt, comparar } = require("../utils/handlePassword");
 const { handleHttpError } = require("../utils/handleError");
 
 const register = async (req, res) => {
@@ -32,7 +32,7 @@ const login = async (req, res) => {
     }
 
     const hashPassword = user.get("password");
-    const check = await compare(req.password, hashPassword);
+    const check = await comparar(req.password, hashPassword);
     if (!check) {
       return handleHttpError(res, "PASSWORD_INVALID", 401);
     }
@@ -44,7 +44,7 @@ const login = async (req, res) => {
     };
     res.send({ data });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     handleHttpError(res, "ERROR_LOGIN");
   }
 };
