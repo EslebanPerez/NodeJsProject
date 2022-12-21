@@ -3,9 +3,11 @@ const router = express.Router();
 const uploadMiddleware = require("../utils/handleStorage")
 const {createItem, getItem, getItems, updateItem, deleteItem} = require(".././controllers/storage");
 const { validatorGetItem } = require('../validators/storage');
+const authMiddleware = require('../middleware/session');
+const checkRol = require('../middleware/rol');
 
 
-router.post("/", uploadMiddleware.single("myfile"), createItem)
+router.post("/", authMiddleware, checkRol(["admin"]), uploadMiddleware.single("myfile"), createItem)
 
 /**
  * Lista de Items
@@ -20,11 +22,11 @@ router.get("/:id", validatorGetItem, getItem)
 /**
  * Actualizar item
  */
-router.put("/:id", validatorGetItem, updateItem)
+router.put("/:id", authMiddleware, checkRol(["admin"]), validatorGetItem, updateItem)
 
 /**
  * Delete Item
  */
-router.delete("/:id", validatorGetItem, deleteItem);
+router.delete("/:id", authMiddleware, checkRol(["admin"]), validatorGetItem, deleteItem);
 
 module.exports = router;
