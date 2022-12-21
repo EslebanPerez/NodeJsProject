@@ -1,18 +1,8 @@
 const request = require("supertest")
 const app = require("../app");
-const {userModel} = require("../models")
+const {userModel} = require("../models");
+const { testAuthLogin, testAuthRegister } = require("./helper/helperData");
 
-const testAuthLogin = {
-  "email": "test@test.com",
-  "password": "123456789"
-}
-
-const testAuthRegister = {
-  "name": "Evan",
-  "age": 2,
-  "email": "test@test.com",
-  "password": "123456789"
-}
 /**
  * Instrucción que se ejecutara antes de todas las pruebas
  * para que las pruebas no generen problema
