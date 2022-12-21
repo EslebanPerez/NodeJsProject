@@ -1,5 +1,6 @@
 const request = require("supertest")
 const app = require("../app");
+const {userModel} = require("../models")
 
 const testAuthLogin = {
   "email": "test2@test.com",
@@ -12,6 +13,15 @@ const testAuthRegister = {
   "email": "test@test.com",
   "password": "123456789"
 }
+/**
+ * Instrucción que se ejecutara antes de todas las pruebas
+ * para que las pruebas no generen problema
+ * y a la vez las pruebas no dependan de lo que se ha guardado en 
+ * la DB
+ */
+beforeAll(async() => {
+  await userModel.deleteMany()
+})
 
 describe("[AUTH] esta es la prueba de /api/auth", () =>{
 
