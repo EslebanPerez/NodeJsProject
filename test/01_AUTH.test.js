@@ -51,4 +51,12 @@ describe("[AUTH] esta es la prueba de /api/auth", () =>{
     expect(response.text).toContain('PASSWORD_INVALID');
   });
 
+  test("Login exitoso", async () => {
+    const response = await request(app)
+      .post("/api/auth/login")
+      .send(testAuthLogin);
+  
+    expect(response.statusCode).toEqual(200);
+  });
+
 })
