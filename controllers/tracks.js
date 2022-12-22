@@ -39,6 +39,7 @@ const createItem = async (req, res) => {
     try {
         const body = matchedData(req);
         const data = await tracksModel.create(body);
+        res.status(201)
         res.send({data});
     } catch (error) {
         handleHttpError(res, "ERROR_CREATE_ITEMS");
