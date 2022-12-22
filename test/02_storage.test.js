@@ -24,4 +24,39 @@ describe("[STORAGE] esta es la prueba de /api/storage", () =>{
     expect(body).toHaveProperty("data");
     expect(body).toHaveProperty("data.url");
   });
+
+  test("Retorna todos los archivos registrados", async () => {
+    const res = await request(app)
+      .get("/api/storage")
+      .set("Authorization", `Bearer ${JWT_TOKEN}`);
+    const { body } = res;
+    expect(res.statusCode).toEqual(200);
+    expect(body).toHaveProperty("data");
+  });
+
+  test("Busca el registro de un storage a partir del ID", async () => {
+    const { _id } = await storageModel.findOne();
+    id = _id.toString();
+  
+    const res = await request(app)
+      .get(`/api/storage/${id}`)
+      .set("Authorization", `Bearer ${JWT_TOKEN}`);
+    const { body } = res;
+    expect(res.statusCode).toEqual(200);
+    expect(body).toHaveProperty("data");
+  });
+
+  test("debe eliminar el item", async () => {
+    const { _id } = await storageModel.findOne();
+    id = _id.toString();
+  
+    const res = await request(app)
+      .delete(`/api/storage/${id}`)
+      .set("Authorization", `Bearer ${JWT_TOKEN}`);
+    const { body } = res;
+    expect(res.statusCode).toEqual(200);
+    expect(body).toHaveProperty("data");
+    expect(body).toHaveProperty("data.deleted", 1);
+  });
+
 });
