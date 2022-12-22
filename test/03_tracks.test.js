@@ -1,7 +1,7 @@
 const request = require("supertest");
 const app = require("../app");
 const { tokenSign } = require("../utils/handleJwt");
-const { userModel, storageModel } = require("../models");
+const { userModel, storageModel, tracksModel } = require("../models");
 const {
   testAuthRegisterAdmin,
   testDataTrack,
@@ -36,3 +36,22 @@ test("Debería registrar un tacks", async () => {
   expect(body).toHaveProperty("data.cover");
 });
 
+test("Debería retornar todos los tracks registrados", async () => {
+  const res = await request(app)
+    .get("/api/tracks")
+    .set("Authorization", `Bearer ${JWT_TOKEN}`);
+  const { body } = res;
+  expect(res.statusCode).toEqual(200);
+  expect(body).toHaveProperty("data");
+});
+
+test("Debería retornar todo el detalle un tack", async () => {
+  const { _id } = await tracksModel.findOne({});
+  id = _id.toString();
+  const res = await request(app)
+    .get(`/api/tracks/${id}`)
+    .set("Authorization", `Bearer ${JWT_TOKEN}`);
+  const { body } = res;
+  expect(res.statusCode).toEqual(200);
+  expect(body).toHaveProperty("data");
+});
