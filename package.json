@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./app.js",
     "dev": "nodemon ./app.js",
-    "test": "cross-env NODE_ENV=test jest --forceExit --silent --runInBand"
+    "test": "cross-env NODE_ENV=test jest --forceExit --silent --runInBand --coverage"
   },
   "keywords": [],
   "author": "",
@@ -31,6 +31,7 @@
   "jest": {
     "testEnvironment": "node",
     "coveragePathIgnorePatterns": ["/node_modules/"],
-    "globalTeardown": "./globalKill.js"
+    "globalTeardown": "./globalKill.js",
+    "coverageReporters": ["json", "html"]
   }
 }
